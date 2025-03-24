@@ -2,6 +2,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import dayGridPlugin from '@fullcalendar/daygrid';
 import { EventInput } from '@fullcalendar/core';
 import { ResourceApi } from '@fullcalendar/resource';
 import { Card, CardContent } from '@/components/ui/card';
@@ -285,12 +287,12 @@ const ResourceTimelineCalendar: React.FC<ResourceTimelineCalendarProps> = ({ cla
           <div className="calendar-container" style={{ height: '70vh' }}>
             <FullCalendar
               ref={calendarRef}
-              plugins={[resourceTimelinePlugin]}
+              plugins={[resourceTimelinePlugin, timeGridPlugin, dayGridPlugin]}
               initialView="resourceTimelineWeek"
               headerToolbar={{
                 left: 'prev,next today',
                 center: 'title',
-                right: 'resourceTimelineDay,resourceTimelineWeek,resourceTimelineMonth'
+                right: 'resourceTimelineDay,resourceTimelineWeek,resourceTimelineMonth,timeGridWeek,dayGridMonth'
               }}
               resources={resources}
               events={events}
@@ -299,7 +301,7 @@ const ResourceTimelineCalendar: React.FC<ResourceTimelineCalendarProps> = ({ cla
               resourceAreaWidth="15%"
               height="100%"
               nowIndicator={true}
-              slotDuration="00:30:00"
+              slotDuration="01:00:00"
               slotLabelInterval="01:00:00"
               datesSet={handleDateSet}
               eventTimeFormat={{
@@ -307,6 +309,16 @@ const ResourceTimelineCalendar: React.FC<ResourceTimelineCalendarProps> = ({ cla
                 minute: '2-digit',
                 meridiem: false,
                 hour12: false
+              }}
+              views={{
+                timeGridWeek: {
+                  // Time grid week view settings
+                  titleFormat: { year: 'numeric', month: 'short', day: 'numeric' }
+                },
+                dayGridMonth: {
+                  // Month view settings
+                  titleFormat: { year: 'numeric', month: 'long' }
+                }
               }}
               resourceLabelDidMount={(info) => {
                 // Apply animation to resources

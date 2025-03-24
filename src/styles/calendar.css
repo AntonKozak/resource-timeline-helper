@@ -62,6 +62,38 @@
   padding: 8px;
 }
 
+/* Style for day grid and time grid events */
+.fc-daygrid-event,
+.fc-timegrid-event {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  border-radius: 4px;
+  padding: 2px 4px;
+  margin: 1px 0;
+  transition: transform 0.2s;
+}
+
+.fc-daygrid-event:hover,
+.fc-timegrid-event:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Make sure the events are visible in day/week views */
+.fc-daygrid-event-dot {
+  border-color: var(--primary);
+}
+
+.fc-timegrid-event-harness {
+  margin-right: 1px;
+}
+
+.fc-timegrid-event .fc-event-time,
+.fc-timegrid-event .fc-event-title {
+  padding: 0 2px;
+}
+
 /* Responsive adjustments */
 @media (max-width: 640px) {
   .fc .fc-toolbar {
