@@ -94,6 +94,43 @@
   padding: 0 2px;
 }
 
+/* Custom Resource Colors */
+/* Room B */
+.fc-timeline-event[style*="background-color: hsl(120, 70%, 50%)"],
+.fc-daygrid-event[data-resource-id="b"],
+.fc-timegrid-event[data-resource-id="b"] {
+  background-color: hsl(120, 70%, 50%) !important;
+  border-color: hsl(120, 70%, 50%) !important;
+  color: white !important;
+}
+
+/* Room C */
+.fc-timeline-event[style*="background-color: hsl(48, 95%, 60%)"],
+.fc-daygrid-event[data-resource-id="c"],
+.fc-timegrid-event[data-resource-id="c"] {
+  background-color: hsl(48, 95%, 60%) !important;
+  border-color: hsl(48, 95%, 60%) !important;
+  color: black !important;
+}
+
+/* Room D */
+.fc-timeline-event[style*="background-color: hsl(280, 70%, 60%)"],
+.fc-daygrid-event[data-resource-id="d"],
+.fc-timegrid-event[data-resource-id="d"] {
+  background-color: hsl(280, 70%, 60%) !important;
+  border-color: hsl(280, 70%, 60%) !important;
+  color: white !important;
+}
+
+/* Room E */
+.fc-timeline-event[style*="background-color: hsl(200, 70%, 50%)"],
+.fc-daygrid-event[data-resource-id="e"],
+.fc-timegrid-event[data-resource-id="e"] {
+  background-color: hsl(200, 70%, 50%) !important;
+  border-color: hsl(200, 70%, 50%) !important;
+  color: white !important;
+}
+
 /* Responsive adjustments */
 @media (max-width: 640px) {
   .fc .fc-toolbar {

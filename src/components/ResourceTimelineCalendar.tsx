@@ -126,7 +126,21 @@ const ResourceTimelineCalendar: React.FC<ResourceTimelineCalendarProps> = ({ cla
       end: endDateTime
     };
     
-    setEvents(prevEvents => [...prevEvents, newEvent]);
+    // Debug log to see what event is being added
+    console.log("Adding new event:", newEvent);
+    
+    setEvents(prevEvents => {
+      const updatedEvents = [...prevEvents, newEvent];
+      console.log("Updated events array:", updatedEvents);
+      return updatedEvents;
+    });
+    
+    // Force calendar to refresh events
+    if (calendarRef.current) {
+      const calendarApi = calendarRef.current.getApi();
+      calendarApi.refetchEvents();
+    }
+    
     toast.success("Event added successfully");
     setIsDialogOpen(false);
     form.reset();
@@ -329,6 +343,7 @@ const ResourceTimelineCalendar: React.FC<ResourceTimelineCalendarProps> = ({ cla
               eventDidMount={(info) => {
                 // Add tooltips and styles to events
                 const eventElement = info.el;
+                console.log("Event mounted:", info.event.title, "Resource ID:", info.event.getResources()[0]?.id);
                 
                 // Create a tooltip
                 eventElement.setAttribute('title', 
@@ -337,7 +352,17 @@ const ResourceTimelineCalendar: React.FC<ResourceTimelineCalendarProps> = ({ cla
                 
                 // Style based on event's resource
                 const resourceId = info.event.getResources()[0]?.id;
-                const resourceIndex = sampleResources.findIndex(r => r.id === resourceId);
+                const resource = resources.find(r => r.id === resourceId);
+                
+                // Apply custom color if defined in the resource
+                if (resource && resource.eventColor) {
+                  const color = resource.eventColor;
+                  if (info.view.type.includes('resource')) {
+                    eventElement.style.backgroundColor = color;
+                  }
+                }
+                
+                const resourceIndex = resources.findIndex(r => r.id === resourceId);
                 
                 // Apply animation
                 eventElement.style.animationDelay = `${(resourceIndex + 1) * 0.1}s`;
