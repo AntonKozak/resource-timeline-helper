@@ -94,6 +94,21 @@
   padding: 0 2px;
 }
 
+/* Weekend days styling */
+.fc-day-sat, .fc-day-sun {
+  background-color: #f9f9f9;
+}
+
+/* Additional styles for 5-day work week view */
+.fc-5day-view .fc-col-header-cell.fc-day-sat,
+.fc-5day-view .fc-col-header-cell.fc-day-sun,
+.fc-5day-view .fc-daygrid-day.fc-day-sat,
+.fc-5day-view .fc-daygrid-day.fc-day-sun,
+.fc-5day-view .fc-timegrid-col.fc-day-sat,
+.fc-5day-view .fc-timegrid-col.fc-day-sun {
+  display: none;
+}
+
 /* Custom Resource Colors */
 /* Room B */
 .fc-timeline-event[style*="background-color: hsl(120, 70%, 50%)"],

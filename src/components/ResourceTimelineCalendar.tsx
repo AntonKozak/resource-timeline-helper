@@ -306,7 +306,7 @@ const ResourceTimelineCalendar: React.FC<ResourceTimelineCalendarProps> = ({ cla
               headerToolbar={{
                 left: 'prev,next today',
                 center: 'title',
-                right: 'resourceTimelineDay,resourceTimelineWeek,resourceTimelineMonth,timeGridWeek,dayGridMonth'
+                right: 'resourceTimelineDay,resourceTimelineWeek,dayGridWeek,timeGridDay'
               }}
               resources={resources}
               events={events}
@@ -315,8 +315,6 @@ const ResourceTimelineCalendar: React.FC<ResourceTimelineCalendarProps> = ({ cla
               resourceAreaWidth="15%"
               height="100%"
               nowIndicator={true}
-              slotDuration="01:00:00"
-              slotLabelInterval="01:00:00"
               datesSet={handleDateSet}
               eventTimeFormat={{
                 hour: '2-digit',
@@ -324,14 +322,33 @@ const ResourceTimelineCalendar: React.FC<ResourceTimelineCalendarProps> = ({ cla
                 meridiem: false,
                 hour12: false
               }}
+              weekends={false}
               views={{
-                timeGridWeek: {
-                  // Time grid week view settings
-                  titleFormat: { year: 'numeric', month: 'short', day: 'numeric' }
+                dayGridWeek: {
+                  // 5-day work week (no weekends)
+                  weekends: false,
+                  titleFormat: { year: 'numeric', month: 'short', day: 'numeric' },
+                  dayHeaderFormat: { weekday: 'short', day: 'numeric' }
                 },
-                dayGridMonth: {
-                  // Month view settings
-                  titleFormat: { year: 'numeric', month: 'long' }
+                timeGridDay: {
+                  // Day view settings
+                  titleFormat: { year: 'numeric', month: 'long', day: 'numeric' },
+                  dayHeaderFormat: { weekday: 'long', day: 'numeric' }
+                },
+                resourceTimelineDay: {
+                  slotDuration: '24:00:00',
+                  slotLabelFormat: {
+                    day: 'numeric',
+                    weekday: 'short'
+                  }
+                },
+                resourceTimelineWeek: {
+                  weekends: false,
+                  slotDuration: '24:00:00',
+                  slotLabelFormat: {
+                    day: 'numeric',
+                    weekday: 'short'
+                  }
                 }
               }}
               resourceLabelDidMount={(info) => {
